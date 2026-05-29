@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Climbing Glossary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Spectral:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rock: #2b2622;
+    --rock-light: #3a342e;
+    --chalk: #f4f1ea;
+    --paper: #ece7db;
+    --rope: #d8642f;
+    --rope-deep: #b34a1d;
+    --moss: #6b7a4f;
+    --line: #c9c0ac;
+    --ink: #1c1916;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Spectral', Georgia, serif;
+    line-height: 1.55;
+    background-image:
+      radial-gradient(circle at 12% 18%, rgba(0,0,0,0.035) 0%, transparent 35%),
+      radial-gradient(circle at 88% 80%, rgba(0,0,0,0.04) 0%, transparent 40%);
+    padding: clamp(1.2rem, 4vw, 4rem);
+  }
+
+  .wrap { max-width: 980px; margin: 0 auto; }
+
+  header {
+    border-bottom: 3px solid var(--rock);
+    padding-bottom: 1.4rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .kicker {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--rope-deep);
+  }
+
+  h1 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.6rem, 8vw, 4.6rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--rock);
+    margin: 0.3rem 0 0.6rem;
+  }
+
+  .lede {
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--rock-light);
+    max-width: 48ch;
+  }
+
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    align-items: center;
+    margin: 1.6rem 0 1.2rem;
+  }
+
+  #search {
+    flex: 1 1 240px;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 0.95rem;
+    padding: 0.7rem 1rem;
+    border: 2px solid var(--rock);
+    background: var(--chalk);
+    color: var(--ink);
+    border-radius: 2px;
+    outline: none;
+  }
+  #search:focus { border-color: var(--rope); }
+  #search::placeholder { color: #9c9484; }
+
+  .count {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--moss);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--chalk);
+    box-shadow: 6px 6px 0 var(--rock);
+  }
+
+  thead th {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.74rem;
+    font-weight: 700;
+    text-align: left;
+    background: var(--rock);
+    color: var(--chalk);
+    padding: 0.85rem 1.1rem;
+  }
+
+  tbody td {
+    padding: 0.95rem 1.1rem;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:nth-child(even) { background: rgba(0,0,0,0.022); }
+  tbody tr:hover { background: rgba(216,100,47,0.09); }
+
+  .term {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--rock);
+    width: 28%;
+    white-space: nowrap;
+  }
+
+  .definition { font-size: 0.97rem; color: var(--rock-light); }
+
+  mark {
+    background: var(--rope);
+    color: var(--chalk);
+    padding: 0 2px;
+    border-radius: 2px;
+  }
+
+  .empty {
+    text-align: center;
+    padding: 2.5rem;
+    font-style: italic;
+    color: var(--moss);
+  }
+
+  footer {
+    margin-top: 1.4rem;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: #9c9484;
+    text-align: right;
+  }
+
+  @media (max-width: 560px) {
+    .term { white-space: normal; width: 36%; }
+    thead { display: none; }
+    table { box-shadow: 4px 4px 0 var(--rock); }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">Reference &mdash; A to Z</div>
+    <h1>Climbing Glossary</h1>
+    <p class="lede">Terms, techniques and the occasional bit of crag slang &mdash; from <em>9c</em> to <em>zone</em>.</p>
+  </header>
+
+  <div class="controls">
+    <input type="text" id="search" placeholder="Search terms or definitions&hellip;" autocomplete="off">
+    <span class="count" id="count"></span>
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>Term</th><th>Definition</th></tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
+
+  <footer>69 entries</footer>
+</div>
+
+<script>
+const DATA = [
+["9c","9c is the absolute pinnacle of sport climbing difficulty. It represents the hardest single-pitch redpoint grade ever established."],
+["American death triangle","A dangerous anchor configuration created by connecting a closed loop of webbing between two protection points, which multiplies rather than distributes the load."],
+["Anchor","A point of attachment for the climbing rope, used to secure a belay, top rope or rappel. Built from slings, runners or the rope itself, using natural features, fixed protection or removable protection."],
+["Andersons","Andersens is a legendary bouldering and rock climbing destination located in the Hollow Mountain area of the Grampians National Park (Gariwerd) in Victoria."],
+["Ar\u00e9te","The outward-facing corner where two wall planes meet, like the outside corner of a building. Climbed with a mix of pinching, edging and balance. The opposite feature is a dihedral or corner."],
+["Barn door","When a climber swings sideways out from the rock because their points of contact are off-balance on one axis; often countered by flagging."],
+["Bashie","A malleable piece of metal that is hammered into a shallow crack for use as protection in aid climbing; difficult to remove. Also called a copperhead."],
+["Belay station","The place from which a belayer belays, often anchored to the rock; especially important on multi-pitch and big wall routes."],
+["Bergschrund","A crevasse that forms at the head of a glacier where the moving ice pulls away from the steep headwall or rock above."],
+["Beta spray","To offer advice to another climber how to do a route without being asked - considered poor etiquette."],
+["Big wall","An extended multi-pitch rock climb, usually requiring at least a full day and often several days, with hauled supplies and portaledges."],
+["Biner","Short for carabiner - A metal loop (usually aluminium) with a spring-loaded gate, used to connect parts of the climbing system."],
+["Bivy","Short for bivouac; also the lightweight sack used for emergency shelter."],
+["Bolt chopping","The deliberate removal of bolts from a climb, usually on traditional routes; a historically contentious act in climbing ethics."],
+["Cambered sole","A curved, arched climbing-shoe sole with a down-turned toe, found on more advanced shoes for precise placements."],
+["Choss","Loose, crumbly or 'rotten' rock that makes for unpleasant or dangerous climbing."],
+["Clean","1. To remove protection from a route as the second climber follows. 2. A route free of loose rock and vegetation. 3. To climb without falling or resting on gear."],
+["Crack","A fissure in a rock face, used for hand- and footholds and for placing protection. Ranges from paper-thin (seams) to body-sized (chimneys); intermediate widths include finger, hand, fist and offwidth."],
+["Crimp","A very small edge held with the fingertips. A full crimp uses a bent second finger joint with the thumb pressed onto the index finger; a half crimp is similar without the thumb wrap."],
+["Dab","Touching the ground, the wall off-route, a hold from another problem, a crash pad, a spotter or any object not part of the route while climbing. A dab invalidates a send; most relevant in bouldering."],
+["Deadpoint","A controlled dynamic move where the climber catches the next hold at the apex of upward motion - the moment of weightlessness after jumping but before falling. Distinguished from a dyno because typically at least one foot stays on a hold."],
+["Deck","1. The ground at the base of a climb. 2. To fall and hit the ground."],
+["Dihedral","An inside corner where two planes of rock meet, like the crease of an open book. Climbed using counter-pressure (stemming) on the opposing walls. Also called a \"corner\" or \"open book.\""],
+["Dirtbag","A climber who lives very frugally, often itinerantly, to spend as much time as possible climbing."],
+["Drop knee","An advanced technique where the knee is rotated and dropped downward to twist the hips toward the wall, increasing reach and stability. Also called an Egyptian."],
+["El Captian","A vertical rock formation in Yosemite National Park, on the north side of Yosemite Valley, near its western end."],
+["Flapper","A piece of skin or callus torn from the hand on a sharp or rough hold, often leaving a flap of hanging skin. A common climbing injury."],
+["Friend","The first commercially successful spring-loaded camming device, made by Wild Country; also a generic term for cams - a piece of active protection with two to four spring-loaded cams on a common axle."],
+["Gamba","An encouraging phrase. It is slang derived from the Japanese word ganbatte (\u9811\u5f35\u3063\u3066), which roughly translates to \"do your best,\" \"hang in there\"."],
+["Gaston","A hold or technique where the climber pushes outward on a vertically oriented hold instead of pulling. Fingers face inward, thumb points down, elbow is high - like opening a sliding elevator door. Named after climber Gaston Rebuffat."],
+["GriGri","An assisted-braking belay device made by Petzl that helps lock the rope when a climber falls."],
+["Gripped","To be paralysed or overwhelmed by fear while climbing."],
+["Gumby","A slang term for a novice or inexperienced climber. The term is a reference to the 1950s claymation character, invoking his awkward, bumbling, and noodle-like movements."],
+["Hangdog","To rest on the rope or protection after falling, then continue climbing without returning to the ground."],
+["Headwall","A steep section near the top of a cliff or rock face where the angle increases dramatically."],
+["Highball","A tall boulder problem, high enough that a fall becomes genuinely dangerous."],
+["Hueco Tanks","A State Park and Historic Site in El Paso County, Texas known for its world-class bouldering."],
+["IFSC","The International Federation of Sport Climbing, the body that organises and regulates competition climbing."],
+["Jam","The technique of climbing a crack by wedging body parts into it."],
+["Jib","A very small foothold, big enough only for the tip of the toe, relying heavily on friction."],
+["L\u00e2ch\u00e9","A dynamic climbing and parkour move where a climber hangs freely in the air and uses their legs and hips to generate momentum, letting go of the holds to swing, leap, and catch a distant target hold or foothold."],
+["Lock Off","A static reach: holding the body in position with one arm fully bent (locked) while the other reaches for the next hold. Demands pulling strength and core tension."],
+["Lynn Hill","Widely considered one of the greatest climbers in history. In 1993, she shocked the world by making the first free ascent of the daunting Nose route on El Capitan in Yosemite Valley. A year later, she completed the same sheer rock face in less than 24 hours, coining the famous phrase, \"It goes, boys.\""],
+["Mono","A pocket or hold with room for only a single finger."],
+["Nut tool","A thin hooked tool used to remove jammed nuts and other protection from cracks. Also called a chock pick."],
+["Onsight","To climb a route or problem successfully on the first attempt with no prior beta and without having seen anyone else attempt it. Considered the \"purest\" style of ascent."],
+["Peg","A piton — a metal blade hammered into a crack for protection."],
+["Prusik","(1) A friction knot tied by wrapping a small-diameter cord loop around a larger rope; it slides when unweighted but grabs when weighted. Named after Karl Prusik (1896-1961). (2) The act of ascending a fixed rope using such loops."],
+["Quickdraw","A short sling with a carabiner at each end, used to attach the rope to protection. The standard tool of sport climbing: one carabiner clips the bolt, the other the rope."],
+["Reel Rock","An annual traveling film festival and online subscription service that focuses on rock climbing and outdoor adventure films."],
+["Royal Robbins","The iconic brand of shoes before sticky rubber came onto the scene in the 80's."],
+["Runout","The distance between a climber and their last piece of protection; a long runout means a long potential fall."],
+["Sandbag","A route given a grade lower than it really deserves, so climbers underestimate its difficulty."],
+["Send","To climb a route or problem successfully from start to finish without falling off. The standard term for a clean ascent."],
+["Slipper","A snug, laceless slip-on climbing shoe, popular for gym climbing and bouldering."],
+["Solutions","The La Sportiva Solution is an aggressive, downturned shoe designed for bouldering and steep sport climbing."],
+["Sprag","A hand position where the fingers and thumb press in opposition against a small edge or crack."],
+["Stem","To climb a corner or chimney by pressing outward in opposition with the feet and hands on opposing walls. See also bridging."],
+["Stick clip","A long pole fitted with a quickdraw, used to clip the rope into the first bolt of a route from the ground."],
+["TFCC","Most rock climbing wrist injuries occur in the Triangular Fibrocartilage Complex, which is the cartilage and ligament structure on the outer (pinky) side of the wrist."],
+["The Business","The hardest move, or hardest sequence of moves, on a climb or problem - the \"make-or-break\" section, commonly referred to as the crux."],
+["Three-point suspension","The principle of moving only one hand or foot at a time, keeping three points of contact on the rock for stability."],
+["Tomoa Narasaki","A Japanese bouldering master who transformed competition climbing with his explosive, dynamic movements and the invention of the \"Tomoa Skip\" technique."],
+["Topo","A diagram, drawing or annotated photograph showing the line and features of a climbing route."],
+["Trad Dad","Often used affectionately (and sometimes self-deprecatingly) for older climbers who started on traditional gear."],
+["Tufa","A flowstone limestone rib or feature protruding from the wall, which can be pinched and climbed; also a moulded version on indoor walls."],
+["Volume","A large geometric shape attached to a climbing wall, onto which smaller holds can be bolted, reshaping the wall's profile."],
+["Zawn","A deep, narrow inlet or cleft cut into a sea cliff, filled by the sea at high tide; a British term."],
+["Zipper","A fall in which pieces of protection pull out one after another in sequence, like a zip opening."],
+["Zone","In competition bouldering, a marked hold partway up a problem that counts toward scoring; formerly called the bonus hold."]
+];
+
+const tbody = document.getElementById('tbody');
+const search = document.getElementById('search');
+const count = document.getElementById('count');
+
+function escapeHtml(s){
+  return s.replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+}
+function highlight(text, q){
+  const safe = escapeHtml(text);
+  if(!q) return safe;
+  const esc = q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  return safe.replace(new RegExp('('+esc+')','gi'), '<mark>$1</mark>');
+}
+
+function render(q=''){
+  const ql = q.trim().toLowerCase();
+  const rows = DATA.filter(([t,d]) =>
+    !ql || t.toLowerCase().includes(ql) || d.toLowerCase().includes(ql));
+
+  if(rows.length === 0){
+    tbody.innerHTML = '<tr><td colspan="2" class="empty">No matches &mdash; try another term.</td></tr>';
+  } else {
+    tbody.innerHTML = rows.map(([t,d]) =>
+      `<tr><td class="term">${highlight(t,q)}</td><td class="definition">${highlight(d,q)}</td></tr>`
+    ).join('');
+  }
+  count.textContent = rows.length + ' / ' + DATA.length + ' shown';
+}
+
+search.addEventListener('input', e => render(e.target.value));
+render();
+</script>
+</body>
+</html>
